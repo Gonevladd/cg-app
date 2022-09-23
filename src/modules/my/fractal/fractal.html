@@ -1,0 +1,40 @@
+
+
+<template>
+
+    <h1>Fractal</h1>
+
+<!--    Fractal canvas-->
+    <canvas width="450" height="300"></canvas>
+
+<!--    Zooming and moving buttons-->
+    <button class="slds-button slds-button_brand" onclick={zoomIn}>Zoom In</button>
+    <button class="slds-button slds-button_brand" onclick={zoomOut}>Zoom Out</button>
+    <button class="slds-button slds-button_brand" onclick={moveRight}>X +</button>
+    <button class="slds-button slds-button_brand" onclick={moveLeft}>X -</button>
+    <button class="slds-button slds-button_brand" onclick={moveUp}>Y +</button>
+    <button class="slds-button slds-button_brand" onclick={moveDown}>Y -</button>
+
+<!--    Color picker-->
+    <select onchange={handleGetSelectedColor} id="change_color">
+        <option value="ORANGE">Orange</option>
+        <option value="LIGHT_GREEN">Light Green</option>
+        <option value="GREEN">Green</option>
+        <option value="LIGHT_BLUE">Light Blue</option>
+        <option value="BLUE">Blue</option>
+        <option value="PURPLE">Purple</option>
+        <option value="PINK">Pink</option>
+        <option value="RED">Red</option>
+    </select>
+
+<!--    Fractal picker-->
+    <select onchange={handleGetSelectedFractal} id="fractal_type">
+        <option value="1">z * sin(z) fractal</option>
+        <option value="2">z * cos(z) fractal</option>
+        <option value="3">sin(z) / cos(z) fractal</option>
+    </select>
+
+<!--    Save button-->
+    <button class="slds-button slds-button--brand" onclick={downloadImage}>Save</button>
+
+</template>
