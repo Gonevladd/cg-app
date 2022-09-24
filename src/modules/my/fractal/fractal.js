@@ -76,12 +76,6 @@ let canvas, ctx;
 
 export default class Fractal extends LightningElement {
 
-    // constructor(){
-    //     super();
-        // this.template.addEventListener('mouseup', this.handleMouseUp.bind(this));
-        // this.template.addEventListener('mousedown', this.handleMouseDown.bind(this));
-        // this.template.addEventListener('mouseclick', this.handleMouseDown.bind(this));
-    // }
 
     handleMouseUp(event){
 
@@ -196,11 +190,15 @@ export default class Fractal extends LightningElement {
 
     zoomIn(){
         zoom += ZOOM_INDEX;
+        moveX -= MOVE_INDEX;
+        moveY -= MOVE_INDEX;
         this.draw(WIDTH, HEIGHT, ITERATIONS);
     }
 
     zoomOut(){
         zoom -= ZOOM_INDEX;
+        moveX += MOVE_INDEX;
+        moveY += MOVE_INDEX;
         this.draw(WIDTH, HEIGHT, ITERATIONS);
     }
 

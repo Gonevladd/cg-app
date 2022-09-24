@@ -16,4 +16,22 @@ export default class Header extends LightningElement{
         //Add your code to call apex method or do some processing
         this.isModalOpen = false;
     }
+
+    callFractalParent(event){
+        let data = {fractalIsShown: true, colorIsShown: false, moveIsShown: false};
+        let ev = new CustomEvent('childmethod', {detail: data});
+        this.dispatchEvent(ev);
+    }
+
+    callColorParent(event){
+        let data = {fractalIsShown: false, colorIsShown: true, moveIsShown: false};
+        let ev = new CustomEvent('childmethod', {detail: data});
+        this.dispatchEvent(ev);
+    }
+
+    callMoveParent(event){
+        let data = {fractalIsShown: false, colorIsShown: false, moveIsShown: true};
+        let ev = new CustomEvent('childmethod', {detail: data});
+        this.dispatchEvent(ev);
+    }
 }
