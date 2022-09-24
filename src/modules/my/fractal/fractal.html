@@ -1,40 +1,67 @@
 
-
 <template>
 
-    <h1>Fractal</h1>
+    <div class="main slds-align_absolute-center">
+        <div class="btn-group">
 
-<!--    Fractal canvas-->
-    <canvas width="450" height="300"></canvas>
+            <span class="fractal-span">
+                <h1 class="label">Вибери тип фрактала:</h1>
+                <button class="slds-button slds-button_brand btn" value="1" onclick={handleGetSelectedFractal}>z * sin(z)</button>
+                <button class="slds-button slds-button_brand btn" value="2" onclick={handleGetSelectedFractal}>z * cos(z)</button>
+                <button class="slds-button slds-button_brand btn" value="3" onclick={handleGetSelectedFractal}>z * sin(z) / z * cos(z)</button>
+            </span>
 
-<!--    Zooming and moving buttons-->
-    <button class="slds-button slds-button_brand" onclick={zoomIn}>Zoom In</button>
-    <button class="slds-button slds-button_brand" onclick={zoomOut}>Zoom Out</button>
-    <button class="slds-button slds-button_brand" onclick={moveRight}>X +</button>
-    <button class="slds-button slds-button_brand" onclick={moveLeft}>X -</button>
-    <button class="slds-button slds-button_brand" onclick={moveUp}>Y +</button>
-    <button class="slds-button slds-button_brand" onclick={moveDown}>Y -</button>
+            <span class="fractal-span">
 
-<!--    Color picker-->
-    <select onchange={handleGetSelectedColor} id="change_color">
-        <option value="ORANGE">Orange</option>
-        <option value="LIGHT_GREEN">Light Green</option>
-        <option value="GREEN">Green</option>
-        <option value="LIGHT_BLUE">Light Blue</option>
-        <option value="BLUE">Blue</option>
-        <option value="PURPLE">Purple</option>
-        <option value="PINK">Pink</option>
-        <option value="RED">Red</option>
-    </select>
+                <h1 class="label">Вибери колір фрактала:</h1>
+                <!--    Color picker-->
+                <select class="btn" onchange={handleGetSelectedColor} id="change_color">
+                    <option value="ORANGE">Оранжевий</option>
+                    <option value="LIGHT_GREEN">Салатовий</option>
+                    <option value="GREEN">Зелений</option>
+                    <option value="LIGHT_BLUE">Голубий</option>
+                    <option value="BLUE">Синій</option>
+                    <option value="PURPLE">Фіолетовий</option>
+                    <option value="PINK">Рожевий</option>
+                    <option value="RED">Червоний</option>
+                </select>
+            </span>
 
-<!--    Fractal picker-->
-    <select onchange={handleGetSelectedFractal} id="fractal_type">
-        <option value="1">z * sin(z) fractal</option>
-        <option value="2">z * cos(z) fractal</option>
-        <option value="3">sin(z) / cos(z) fractal</option>
-    </select>
 
-<!--    Save button-->
-    <button class="slds-button slds-button--brand" onclick={downloadImage}>Save</button>
+
+            <span class="fractal-span">
+                <h1 class="label">Керуй розміром фрактала:</h1>
+                <!--    Zooming and moving buttons-->
+                <button class="slds-button slds-button_brand btn" onclick={zoomIn}>Приблизити</button>
+                <button class="slds-button slds-button_brand btn" onclick={zoomOut}>Віддалити</button>
+            </span>
+
+            <!--    <button class="slds-button slds-button_brand" onclick={moveRight}>X +</button>-->
+            <!--    <button class="slds-button slds-button_brand" o  -</button>-->
+            <!--    <button class="slds-button slds-button_brand" onclick={moveUp}>Y +</button>-->
+            <!--    <button class="slds-button slds-button_brand" onclick={moveDown}>Y -</button>-->
+
+
+
+<!--            &lt;!&ndash;    Fractal picker&ndash;&gt;-->
+<!--            <select class="btn" onchange={handleGetSelectedFractal} id="fractal_type">-->
+<!--                <option value="1">z * sin(z) fractal</option>-->
+<!--                <option value="2">z * cos(z) fractal</option>-->
+<!--                <option value="3">sin(z) / cos(z) fractal</option>-->
+<!--            </select>-->
+
+            <!--    Save button-->
+        </div>
+
+        <span class="fractal-canvas">
+            <canvas class="canvas" width="650" height="500" onclick={handleMouseUp}></canvas>
+            <button class="slds-button slds-button--brand btn save-btn" onclick={downloadImage}>Зберегти фрактал</button>
+        </span>
+
+
+    </div>
+
+
+    <!--    Fractal canvas-->
 
 </template>

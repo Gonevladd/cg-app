@@ -1,8 +1,8 @@
 
 import {LightningElement} from "lwc";
 
-const WIDTH = 450, HEIGHT = 300, ITERATIONS = 80, ZOOM_INDEX = 0.2, MOVE_INDEX = 50, COLOR_INDEX = 1;
-let zoom = 1, moveX = 0, moveY = 0, colorChange = 1;
+const WIDTH = 650, HEIGHT = 500, ITERATIONS = 80, ZOOM_INDEX = 0.2, MOVE_INDEX = 50, COLOR_INDEX = 1;
+let zoom = 1, moveX = 0, moveY = 0, colorChange = 1, x = 0, y = 0;
 let fractalType = 1;
 
 
@@ -76,6 +76,44 @@ let canvas, ctx;
 
 export default class Fractal extends LightningElement {
 
+    // constructor(){
+    //     super();
+        // this.template.addEventListener('mouseup', this.handleMouseUp.bind(this));
+        // this.template.addEventListener('mousedown', this.handleMouseDown.bind(this));
+        // this.template.addEventListener('mouseclick', this.handleMouseDown.bind(this));
+    // }
+
+    handleMouseUp(event){
+
+        let rect = canvas.getBoundingClientRect(),
+            newX = event.clientX - rect.left,
+            newY = event.clientY - rect.top;
+        if(newX <= 325 && newX >= 0){
+            this.moveRight()
+            console.log('Left');
+        }
+        if(newX > 325 && newX <= 650){
+            this.moveLeft();
+            console.log('Right');
+        }
+        if(newY >= 10 && newY <= 250){
+            this.moveUp();
+            console.log('Up');
+        }
+        if(newY > 250 && newY <= 500){
+            this.moveDown();
+            console.log('Down');
+        }
+
+        x = newX, y = newY;
+        console.log(x + " " + y);
+        this.draw(WIDTH, HEIGHT, ITERATIONS);
+        // console.log(event);
+    }
+
+    handleMouseDown(event){
+        console.log('Down');
+    }
 
     //Check if this pixel belongs fractal or not
     belongs(re, im, iterations){
