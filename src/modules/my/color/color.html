@@ -1,0 +1,134 @@
+<template>
+  <div class="main slds-align_absolute-center">
+    <div class="btn-group">
+
+<!--        RGB model-->
+        <legend class="label">Введи дані для RGB моделі:</legend>
+        <fieldset class="slds-form-element slds-form-element_compound fractal-span">
+            <div class="slds-form-element__control">
+                <div class="slds-form-element__row">
+                    <div class="slds-size_1-of-2">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label sub-label" for="rgb-r">R</label>
+                            <div class="slds-form-element__control">
+                                <input type="number" id="rgb-r" class="slds-input btn" min="0" max="255" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-size_1-of-2">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label sub-label" for="rgb-g">G</label>
+                            <div class="slds-form-element__control">
+                                <input type="number" id="rgb-g" class="slds-input btn" min="0" max="255" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-size_1-of-2">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label sub-label" for="rgb-b">B</label>
+                            <div class="slds-form-element__control">
+                                <input type="number" id="rgb-b" class="slds-input btn" min="0" max="255" required/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+<!--        HSV model-->
+        <legend class="label">Введи дані для HSV моделі:</legend>
+        <fieldset class="slds-form-element slds-form-element_compound fractal-span">
+            <div class="slds-form-element__control">
+                <div class="slds-form-element__row">
+                    <div class="slds-size_1-of-2">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label sub-label" for="hsv-h">H</label>
+                            <div class="slds-form-element__control">
+                                <input type="number" id="hsv-h" class="slds-input btn" min="0" max="255" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-size_1-of-2">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label sub-label" for="hsv-s">S</label>
+                            <div class="slds-form-element__control">
+                                <input type="number" id="hsv-s" class="slds-input btn" min="0" max="255" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-size_1-of-2">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label sub-label" for="hsv-v">V</label>
+                            <div class="slds-form-element__control">
+                                <input type="number" id="hsv-v" class="slds-input btn" min="0" max="255" required/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <legend class="label">Керуй зображенням:</legend>
+        <fieldset class="slds-form-element slds-form-element_compound fractal-span">
+            <div class="slds-form-element__control">
+                <div class="slds-form-element__row">
+                    <div class="slds-size_1-of-2">
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                                <button class="slds-button do-btn btn slds-align_absolute-center">Порівняти</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="slds-form-element slds-form-element_compound fractal-span">
+            <div class="slds-form-element__control">
+                <div class="slds-form-element__row">
+                    <div class="slds-size_1-of-2">
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                                <button class="slds-button btn do-btn slds-align_absolute-center" onclick={changePhoto}>Виконати</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+<!--        <span>-->
+<!--            <button class="slds-button btn do-btn slds-align_absolute-center" onclick={changePhoto}>Виконати</button>-->
+<!--            <button class="slds-button btn do-btn slds-align_absolute-center">Порівняти</button>-->
+<!--        </span>-->
+
+    </div>
+
+    <span class="fractal-canvas">
+<!--            <canvas class="canvas" width="650" height="500"></canvas>-->
+        <template if:false={showImage}>
+            <div class="slds-form-element temp">
+              <span class="slds-form-element__label" id="file-selector-primary-label-105">Вибери фото</span>
+              <div class="slds-form-element__control">
+                <div class="slds-file-selector slds-file-selector_images">
+                  <div class="slds-file-selector__dropzone">
+                    <input type="file" class="slds-file-selector__input slds-assistive-text" accept="image/png/jpg" id="file-upload-input-107" aria-labelledby="file-selector-primary-label-105 file-selector-secondary-label106" oninput={uploadPhoto}/>
+                    <label class="slds-file-selector__body" for="file-upload-input-107" id="file-selector-secondary-label106">
+                      <span class="slds-file-selector__button slds-button slds-button_neutral">
+                        <svg class="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                          <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#upload"></use>
+                        </svg>Знайди необхідне фото</span>
+                      <span class="slds-file-selector__text slds-medium-show">або кинь сюди</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </template>
+        <template if:true={showImage}>
+            <img src={path} class="img-style"/>
+        </template>
+
+        <input class="slds-slider__range slds-color-picker__hue-slider slider temp" type="range" min="0" max="255" step="1"/>
+        <button class="slds-button slds-button--brand btn save-btn temp" onclick={downloadImage}>Зберегти фото</button>
+    </span>
+
+  </div>
+</template>

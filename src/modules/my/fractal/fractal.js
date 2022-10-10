@@ -1,7 +1,7 @@
 
 import {LightningElement} from "lwc";
 
-const WIDTH = 650, HEIGHT = 500, ITERATIONS = 80, ZOOM_INDEX = 0.2, MOVE_INDEX = 50, COLOR_INDEX = 1;
+const WIDTH = 650, HEIGHT = 500, ITERATIONS = 80, ZOOM_INDEX = 0.5, MOVE_INDEX = 50, COLOR_INDEX = 1;
 let zoom = 1, moveX = 0, moveY = 0, colorChange = 1, x = 0, y = 0;
 let fractalType = 1;
 
@@ -102,27 +102,22 @@ export default class Fractal extends LightningElement {
         x = newX, y = newY;
         console.log(x + " " + y);
         this.draw(WIDTH, HEIGHT, ITERATIONS);
-        // console.log(event);
     }
 
-    handleMouseDown(event){
-        console.log('Down');
-    }
 
     //Check if this pixel belongs fractal or not
     belongs(re, im, iterations){
         let z, c = new ComplexNumber(re, im), i = 0;
 
-
-        if(fractalType == 1){
-            z = new ComplexNumber(Math.PI/2,Math.PI/20);
-            // z = new ComplexNumber(Math.PI/2,Math.PI/2);
-        }else if(fractalType == 2){
-            z = new ComplexNumber(0,0);
-        }else if(fractalType == 3){
-            z = new ComplexNumber(Math.PI/4,Math.PI/4);
+        {
+            if (fractalType == 1) {
+                z = new ComplexNumber(Math.PI / 2, Math.PI / 20);
+            } else if (fractalType == 2) {
+                z = new ComplexNumber(0, 0);
+            } else if (fractalType == 3) {
+                z = new ComplexNumber(re, im);
+            }
         }
-
 
         while(z.abs() < 100  && i < iterations){
 
@@ -131,9 +126,8 @@ export default class Fractal extends LightningElement {
             }else if(fractalType == 2){
                 z = c.mul(z.cos(c));
             }else if(fractalType == 3){
-                z = c.mul(z.sin(c)).mul(c.mul(z.cos(c)));
+                z = (z.sin(z).mul(z.cos(z))).add(z);
             }
-
             i++;
         }
         return i;
@@ -190,15 +184,15 @@ export default class Fractal extends LightningElement {
 
     zoomIn(){
         zoom += ZOOM_INDEX;
-        moveX -= MOVE_INDEX;
-        moveY -= MOVE_INDEX;
+        moveX -= MOVE_INDEX*2;
+        moveY -= MOVE_INDEX*2;
         this.draw(WIDTH, HEIGHT, ITERATIONS);
     }
 
     zoomOut(){
         zoom -= ZOOM_INDEX;
-        moveX += MOVE_INDEX;
-        moveY += MOVE_INDEX;
+        moveX += MOVE_INDEX*2;
+        moveY += MOVE_INDEX*2;
         this.draw(WIDTH, HEIGHT, ITERATIONS);
     }
 
