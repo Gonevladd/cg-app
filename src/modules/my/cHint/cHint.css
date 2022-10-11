@@ -1,0 +1,19 @@
+
+.info-header{
+    font-size: 34px;
+    font-family: "American Typewriter";
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.einstein-img{
+    height: 80px;
+    width: 60px;
+}
+
+.fractal-example-img{
+    margin-right: 20px;
+    border-radius: 5px;
+    height: 150px;
+}
